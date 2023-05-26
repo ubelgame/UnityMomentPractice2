@@ -9,7 +9,7 @@ public class Character : MonoBehaviour
     float Runspeed = 5.0f;
     float Rotationspeed = 12.0f;
     float Jumpforce = 4.5f;
-    float fallSpeedMultiplier = 5f;
+    float fallSpeedMultiplier = 3f;
     public bool isWalking;
     public bool Isrunning;
     Vector3 Move3d;
@@ -18,6 +18,7 @@ public class Character : MonoBehaviour
     public bool isGrounded;
     private Rigidbody rb;
     public bool  isJumping;
+    public bool isFalling;
 
     // Start is called before the first frame update
     void Start()
@@ -30,6 +31,7 @@ public class Character : MonoBehaviour
     {
         PlayerMotions();
         ApplyFallMultiplier();
+        CheckFalling();
     }
 
     public void PlayerMotions(){
@@ -85,6 +87,14 @@ public class Character : MonoBehaviour
     private void Jumpforward(){
         Vector3 jumpdirection =transform.forward + Vector3.up;
         rb.AddForce(jumpdirection * Jumpforce , ForceMode.Impulse); 
+    }
+
+    private void CheckFalling(){
+        if(!isGrounded && rb.velocity.y < -0.1f){
+            isFalling = true;
+        }else{
+            isFalling = false;
+        }
     }
 
     private void OnCollisionEnter(Collision collision){

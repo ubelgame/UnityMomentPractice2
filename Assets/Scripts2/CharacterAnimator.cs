@@ -11,6 +11,7 @@ public class CharacterAnimator : MonoBehaviour
     string VELOCITYY = "velocityY";
     string IS_JUMPING = "isJumping";
     string IS_RUNJUMPING = "isRunJumping";
+    string IS_FALLING = "isFalling";
     float horizontal;
     float vertical;
     private Vector3 newMove3d;
@@ -36,6 +37,7 @@ public class CharacterAnimator : MonoBehaviour
         animator.SetFloat(VELOCITYY,vertical);
         animator.SetBool(IS_JUMPING,!character.isGrounded);
         // animator.SetBool(IS_RUNJUMPING,character.Isrunning);
+        animator.SetBool(IS_FALLING,character.isFalling);
 
 
     }
