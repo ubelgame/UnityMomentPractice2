@@ -758,6 +758,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   character: {fileID: 1545269865}
+--- !u!114 &811248564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 811248561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd79f40f68d1e7144a5b390ed21a48bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  character: {fileID: 1545269865}
+  CurrentStamina: 0
+  StaminaThreshold: 20
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1500,6 +1515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd7ad9a312ada3a4e8a1024f8d1a24c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stamina: {fileID: 811248564}
   isWalking: 0
   Isrunning: 0
   h: 0

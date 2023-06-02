@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Character : MonoBehaviour
 {
+    [SerializeField]private Stamina stamina;
+    
     float speed;
     float Movespeed = 2.0f;
     float Runspeed = 5.0f;
@@ -19,10 +21,17 @@ public class Character : MonoBehaviour
     private Rigidbody rb;
     public bool  isJumping;
     public bool isFalling;
+    private Stamina staminaScript;
 
     // Start is called before the first frame update
     void Start()
     {
+        staminaScript = Stamina.Instance;
+        if (staminaScript == null)
+        {
+            Debug.LogError("Stamina script not found. Make sure it is present in the scene.");
+        }
+
         rb = GetComponent<Rigidbody>();
     }
 
@@ -46,8 +55,16 @@ public class Character : MonoBehaviour
 
         //controls the speed if running or walking
         isWalking = Move3d.magnitude > 0;
-        Isrunning = isWalking && Input.GetKey(KeyCode.LeftShift);
+      
+        if(staminaScript != null){
+            if(staminaScript.CurrentStamina >= staminaScript.StaminaThreshold){
+                  Isrunning = isWalking && Input.GetKey(KeyCode.LeftShift);
+
+            }
+        }
+
         isJumping = Isrunning && Input.GetKeyDown(KeyCode.Space) && isGrounded; 
+
         speed = Isrunning ? Runspeed : Movespeed;
 
         //allowing the character to move based on the Move3d vector3 inputs
