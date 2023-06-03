@@ -6,7 +6,7 @@ public class Stamina : MonoBehaviour
 {
     [SerializeField]private Character character;
     // Start is called before the first frame update
-    float MaxStamina = 100f;
+    public float MaxStamina = 100f;
     public float CurrentStamina;
     float StaminaDrainrate = 20f;
     float StaminaRegenrate = 10f;
