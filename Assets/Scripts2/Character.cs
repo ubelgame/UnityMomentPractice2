@@ -50,8 +50,6 @@ public class Character : MonoBehaviour
         
         //Adding gotten axis to a vector
         Move3d = new Vector3(h, 0, v).normalized;
-        h = Mathf.Clamp01(Mathf.Abs(h));
-        v = Mathf.Clamp01(Mathf.Abs(v));
 
         //controls the speed if running or walking
         isWalking = Move3d.magnitude > 0;
@@ -67,10 +65,12 @@ public class Character : MonoBehaviour
 
         speed = Isrunning ? Runspeed : Movespeed;
 
+        
+
         //allowing the character to move based on the Move3d vector3 inputs
         transform.Translate(Move3d * speed * Time.deltaTime,Space.World);
 
-        //to make the character rotate 
+        // //to make the character rotate 
         transform.forward = Vector3.Slerp(transform.forward,Move3d,Time.deltaTime * Rotationspeed);
 
         //jump
