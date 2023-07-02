@@ -72,7 +72,7 @@ public class Character : MonoBehaviour
         
         //Adding gotten axis to a vector
         Move3d = cameraforwardretargeting + camerarightretargeting;
-        Move3d = Move3d.normalized;
+        // Move3d = Move3d.normalized;
 
         //controls the speed if running or walking
         isWalking = Move3d.magnitude > 0;

@@ -54,10 +54,6 @@ public class Stamina : MonoBehaviour
             // MaxStamina = Mathf.RoundToInt(MaxStamina);
 
             Mathf.Clamp(CurrentStamina,0f,MaxStamina);
-            rem = CurrentStamina;
-            ram = MaxStamina;
        }    
-
-       Debug.Log(rem);
     }
 }
