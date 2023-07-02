@@ -5,6 +5,7 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     [SerializeField]private Stamina stamina;
+    [SerializeField]Transform cam;
     
     float speed;
     float Movespeed = 2.0f;
@@ -33,6 +34,16 @@ public class Character : MonoBehaviour
         }
 
         rb = GetComponent<Rigidbody>();
+        
+         // Lock and hide the cursor
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        //show coursor
+        if(Input.GetKeyDown(KeyCode.LeftAlt)){
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
     }
 
     // Update is called once per frame
@@ -45,11 +56,23 @@ public class Character : MonoBehaviour
 
     public void PlayerMotions(){
         //Getting axis for movement
-        h = Input.GetAxis("Horizontal");
-        v = Input.GetAxis("Vertical");
+        h = Input.GetAxis("Horizontal") * speed;
+        v = Input.GetAxis("Vertical") *speed;
+ 
+        //camera transform
+        Vector3 cameraforward = cam.forward;
+        Vector3 cameraright = cam.right;
+
+        cameraforward.y = 0;
+        cameraright.y = 0;
+
+        //camera and movement rotation retargeting
+        Vector3 cameraforwardretargeting = v * cameraforward;
+        Vector3 camerarightretargeting = h * cameraright;
         
         //Adding gotten axis to a vector
-        Move3d = new Vector3(h, 0, v).normalized;
+        Move3d = cameraforwardretargeting + camerarightretargeting;
+        Move3d = Move3d.normalized;
 
         //controls the speed if running or walking
         isWalking = Move3d.magnitude > 0;
@@ -68,7 +91,8 @@ public class Character : MonoBehaviour
         
 
         //allowing the character to move based on the Move3d vector3 inputs
-        transform.Translate(Move3d * speed * Time.deltaTime,Space.World);
+        transform.Translate(Move3d  * Time.deltaTime,Space.World);
+        // rb.velocity = new Vector3(Move3d.x, rb.velocity.y, Move3d.z).normalized;
 
         // //to make the character rotate 
         transform.forward = Vector3.Slerp(transform.forward,Move3d,Time.deltaTime * Rotationspeed);
